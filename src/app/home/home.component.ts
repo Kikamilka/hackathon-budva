@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormControlName, Validator, Validators} from "@angular/forms";
 import { v4 as uuidv4 } from 'uuid';
+import {EventsService} from "../services/events.service";
 
 @Component({
   selector: 'app-home',
@@ -32,11 +33,15 @@ export class HomeComponent implements OnInit {
     },
   ];
 
-  constructor() { }
+  constructor(private eventsService: EventsService) { }
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('userId') || '';
     this.userName = localStorage.getItem('userName') || '';
+
+    if (this.userId) {
+      this.eventsService.getEvents();
+    }
   }
 
   saveUser(): void {
@@ -45,6 +50,8 @@ export class HomeComponent implements OnInit {
     localStorage.setItem('userId', this.userId);
     localStorage.setItem('userName', this.userName);
     console.log(this.userName, this.userId);
+
+    this.eventsService.getEvents();
   }
 
 }

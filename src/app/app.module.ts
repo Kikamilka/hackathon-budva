@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig} from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +22,14 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {HttpClientModule} from "@angular/common/http";
+import { SwipeCardComponent } from './swipe-card/swipe-card.component';
+import * as Hammer from 'hammerjs';
+
+export class MyHammerConfig extends HammerGestureConfig {
+  override overrides = <any> {
+    swipe: { direction: Hammer.DIRECTION_ALL },
+  };
+}
 
 @NgModule({
   declarations: [
@@ -31,7 +39,8 @@ import {HttpClientModule} from "@angular/common/http";
     SearchComponent,
     CreateEventComponent,
     EventsComponent,
-    EventComponent
+    EventComponent,
+    SwipeCardComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +60,15 @@ import {HttpClientModule} from "@angular/common/http";
     MatButtonToggleModule,
     HttpClientModule,
   ],
-  providers: [MatDatepickerModule, MatNativeDateModule, HttpClientModule],
+  providers: [
+    MatDatepickerModule,
+    MatNativeDateModule,
+    HttpClientModule,
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: MyHammerConfig,
+    }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

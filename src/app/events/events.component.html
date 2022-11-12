@@ -1,8 +1,21 @@
-<button (click)="eventsService.getEvents()">Get events</button>
+<!--<button (click)="eventsService.getEvents()">Get events</button>-->
 <!--<app-event ></app-event>-->
-<div *ngFor="let itemEvent of events">
-  <p>{{itemEvent.title}}</p>
-  <p>{{itemEvent.description}}</p>
-  <p>{{itemEvent.teaser}}</p>
-  <img [src]="itemEvent.photo">
+<!--<div *ngFor="let itemEvent of events">-->
+<!--  <p>{{itemEvent.title}}</p>-->
+<!--  <p>{{itemEvent.description}}</p>-->
+<!--  <p>{{itemEvent.teaser}}</p>-->
+<!--  <img [src]="itemEvent.photo">-->
+<!--</div>-->
+<div class="tbg">
+  <div *ngIf="events.length > 0" class="tbgwrap">
+    <app-swipe-card [events]="events" [parentSubject]="parentSubject"></app-swipe-card>
+    <div class="tcontrols">
+<!--      <button mat-button (click)='cardAnimation("swipeleft")'><mat-icon>close</mat-icon></button>-->
+      <button mat-fab aria-label="Dislike" (click)='cardAnimation("swipeleft")' color="warn" class="my-btn">
+        <mat-icon>close</mat-icon>
+      </button>
+      <button mat-mini-fab (click)='openCard()'>i</button>
+      <button mat-fab aria-label="Like" (click)='cardAnimation("swiperight")' color="primary" class="my-btn"><mat-icon>favorite</mat-icon></button>
+    </div>
+  </div>
 </div>
