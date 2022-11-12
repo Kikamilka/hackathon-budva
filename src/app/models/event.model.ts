@@ -5,7 +5,7 @@ export interface Activity {
   description: string;
   city?: string;
   members?: string[];
-  max_people: number,
+  max_people?: number,
   datetime: string;
   photo: string;
 }

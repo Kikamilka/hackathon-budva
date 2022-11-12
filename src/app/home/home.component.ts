@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormControlName, Validator, Validators} from "@angular/forms";
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-home',
@@ -7,8 +8,8 @@ import {FormControl, FormControlName, Validator, Validators} from "@angular/form
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  public userName = new FormControl('', Validators.required);
-  public name: string = 'test';
+  public userId: string = '';
+  public userName: string = 'test';
 
   public availableInterests = [
     {
@@ -34,6 +35,16 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.userId = localStorage.getItem('userId') || '';
+    this.userName = localStorage.getItem('userName') || '';
+  }
+
+  saveUser(): void {
+    this.userId = uuidv4();
+
+    localStorage.setItem('userId', this.userId);
+    localStorage.setItem('userName', this.userName);
+    console.log(this.userName, this.userId);
   }
 
 }

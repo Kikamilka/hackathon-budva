@@ -1,22 +1,22 @@
-<div class="event-container">
-  <h2>Info about event</h2>
+<div *ngIf="activity" class="event-container">
+  <h2>{{editMode ? 'Add new event' : 'Info about event'}}</h2>
 
   <mat-form-field hintLabel="Event title - short description. Max 40 characters" appearance="fill">
     <mat-label>Enter event title</mat-label>
-    <input matInput #title maxlength="20" [disabled]="editMode">
+    <input matInput #title maxlength="20" [disabled]="!editMode" [(ngModel)]="activity.title">
     <mat-hint align="end">{{title?.value?.length || 0}}/20</mat-hint>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Event city</mat-label>
-    <mat-select [disabled]="editMode">
+    <mat-select [disabled]="!editMode">
       <mat-option *ngFor="let city of cities" [value]="city">{{city}}</mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker" [disabled]="editMode">
+    <input matInput [matDatepicker]="picker" [disabled]="!editMode">
     <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
@@ -24,13 +24,16 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Teaser</mat-label>
-    <textarea matInput #teaser maxlength="50" [disabled]="editMode"></textarea>
+    <textarea matInput #teaser maxlength="50" [disabled]="!editMode" [(ngModel)]="activity.teaser"></textarea>
     <mat-hint align="end">{{teaser?.value?.length || 0}}/50</mat-hint>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Description</mat-label>
-    <textarea matInput [disabled]="editMode"></textarea>
+    <textarea matInput [disabled]="!editMode" [(ngModel)]="activity.description"></textarea>
   </mat-form-field>
+
+
+  <button *ngIf="editMode" (click)="addNewEvent()">Create this</button>
 
 </div>

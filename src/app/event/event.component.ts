@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Activity} from "../models/event.model";
+import {v4 as uuidv4} from "uuid";
 
 @Component({
   selector: 'app-event',
@@ -6,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./event.component.scss']
 })
 export class EventComponent implements OnInit {
-  @Input() event?: Event;
+  @Input() activity?: Activity;
   @Input() editMode = false;
 
   public readonly cities: string[] = ['Podgorica', 'Budva', 'Herceg Novi', 'Bar', 'Tivat', 'Kotor', 'Kolashin'];
@@ -14,6 +16,21 @@ export class EventComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    if (!this.activity) {
+      this.activity = {
+        city: '',
+        datetime: '',
+        description: '',
+        id: uuidv4(),
+        photo: '',
+        teaser: '',
+        title: '',
+      }
+    }
+  }
+
+  addNewEvent() {
+    console.log('create event: ', this.activity?.title);
   }
 
 }
