@@ -1,9 +1,11 @@
-export interface Event {
+export interface Activity {
+  id: string;
   title: string;
   teaser: string;
   description: string;
-  city: string;
+  city?: string;
   members?: string[];
-  date: Date;
-  imageUrl: string;
+  max_people: number,
+  datetime: string;
+  photo: string;
 }

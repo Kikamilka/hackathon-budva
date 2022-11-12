@@ -1,1 +1,8 @@
-<app-event></app-event>
+<button (click)="eventsService.getEvents()">Get events</button>
+<!--<app-event ></app-event>-->
+<div *ngFor="let itemEvent of events">
+  <p>{{itemEvent.title}}</p>
+  <p>{{itemEvent.description}}</p>
+  <p>{{itemEvent.teaser}}</p>
+  <img [src]="itemEvent.photo">
+</div>
