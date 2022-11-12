@@ -25,3 +25,8 @@ button:hover,
 .active-link {
   color: blueviolet;
 }
+
+.main-container {
+  margin: 0 16px;
+  flex-grow: 1;
+}

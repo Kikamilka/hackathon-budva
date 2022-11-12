@@ -1,7 +1,26 @@
 <form class="example-form">
-  <mat-form-field class="example-full-width" appearance="fill">
+  <mat-form-field appearance="fill">
     <mat-label>Your name</mat-label>
-    <input matInput placeholder="Petr Ivanov" value="Petr Ivanov">
+    <input matInput type="text" [formControl]="userName" [(ngModel)]="name" required>
   </mat-form-field>
+
+  <mat-chip-list>
+    <ng-container *ngFor="let chip of availableInterests">
+<!--      <mat-chip [selected]="chip.active" (click)="chip.active = !chip.active">-->
+<!--        {{chip.name}}-->
+<!--      </mat-chip>-->
+
+      <mat-button-toggle-group name="interests" aria-label="interests" multiple>
+        <mat-button-toggle [value]="chip">{{chip.name}}</mat-button-toggle>
+      </mat-button-toggle-group>
+    </ng-container>
+  </mat-chip-list>
+
+  <div class="button-container">
+    <button mat-fab aria-label="Save me">
+      <mat-icon>check_circle</mat-icon>
+    </button>
+  </div>
+
 </form>
 
