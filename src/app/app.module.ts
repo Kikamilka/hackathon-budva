@@ -10,7 +10,6 @@ import {MatInputModule} from "@angular/material/input";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
-import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { EventsComponent } from './events/events.component';
@@ -35,7 +34,6 @@ export class MyHammerConfig extends HammerGestureConfig {
   declarations: [
     AppComponent,
     HomeComponent,
-    ProfileComponent,
     SearchComponent,
     CreateEventComponent,
     EventsComponent,

@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'hackathon';
+
+  activeLink(linkName: string): boolean {
+    return linkName === window.location.pathname;
+  }
 }

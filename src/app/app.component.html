@@ -7,25 +7,21 @@
 
   <footer style="height: 80px">
     <mat-toolbar class="toolbarNav">
-      <button mat-flat-button routerLink="" routerLinkActive="active-link">
-        <mat-icon class="material-icons color_blue">home</mat-icon>
+      <button mat-flat-button routerLink="" [ngClass]="{'currentLink': activeLink('/user')}">
+        <mat-icon class="material-icons color_blue">person</mat-icon>
         <span>Home</span>
       </button>
-      <button mat-flat-button routerLink="/search" routerLinkActive="active-link">
+      <button mat-flat-button routerLink="/search" [ngClass]="{'currentLink': activeLink('/search')}">
         <mat-icon class="material-icons color_blue">search</mat-icon>
         <span>Find</span>
       </button>
-      <button mat-flat-button routerLink="./events" routerLinkActive="active-link">
+      <button mat-flat-button routerLink="./events" [ngClass]="{'currentLink': activeLink('/events')}">
         <mat-icon class="material-icons color_blue">list</mat-icon>
         <span>My list</span>
       </button>
-      <button mat-flat-button routerLink="./create" routerLinkActive="active-link">
+      <button mat-flat-button routerLink="./create" [ngClass]="{'currentLink': activeLink('/create')}">
         <mat-icon class="material-icons color_blue">add_circle_outline</mat-icon>
         <span>Add new</span>
-      </button>
-      <button mat-flat-button routerLink="./profile" routerLinkActive="active-link">
-        <mat-icon class="material-icons color_blue">person</mat-icon>
-        <span>Profile</span>
       </button>
     </mat-toolbar>
   </footer>
