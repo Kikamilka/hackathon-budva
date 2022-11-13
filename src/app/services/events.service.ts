@@ -11,6 +11,46 @@ export class EventsService {
 
   public events$: BehaviorSubject<Activity[]> = new BehaviorSubject<Activity[]>([])
   public currentCart$: BehaviorSubject<number> = new BehaviorSubject<number>(0)
+  public user$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
+  public CITIES: string[] = [
+    'Podgorica', 'Budva', 'Herceg Novi', 'Bar', 'Tivat', 'Kotor', 'Kolashin', 'Zablyak'
+  ]
+
+  public INTERESTS: string[] = [
+    'Football',
+    'Dancing',
+    'Hiking',
+    'Reading',
+    'Doing stuff outdoors',
+    'Music',
+    'Cooking',
+    'Travelling',
+    'Food',
+    'Art',
+    'IT',
+    'Juggling',
+    'Running',
+    'Yoga',
+    'Pilates',
+    'Painting',
+    'Wine',
+    'Coffee',
+    'Health',
+    'Sports',
+    'Poetry',
+    'Nature',
+    'Cooking',
+    'Beer',
+    'Chess',
+    'Board games',
+    'Dungeons & Dragons',
+    'Walking',
+    'Sightseeing',
+    'Museums',
+    'Volunteering',
+    'Cats',
+  ]
 
   constructor(private http: HttpClient) { }
 

@@ -11,6 +11,8 @@ import {Router} from "@angular/router";
 export class HomeComponent implements OnInit {
   public userId: string = '';
   public userName: string = 'test';
+  public userCity = '';
+  public interests: string[] = [];
 
   public availableInterests = [
     {
@@ -33,7 +35,7 @@ export class HomeComponent implements OnInit {
     },
   ];
 
-  constructor(private eventsService: EventsService, private router: Router) { }
+  constructor(public eventsService: EventsService, private router: Router) { }
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('userId') || '';
@@ -51,13 +53,46 @@ export class HomeComponent implements OnInit {
       localStorage.setItem('userId', this.userId);
       localStorage.setItem('userName', this.userName);
 
-      this.eventsService.getEvents();
+      this.eventsService.user$.next({
+        userId: this.userId,
+        userName: this.userName,
+        userCity: this.userCity,
+        userInterests: this.interests,
+      })
+
+      // this.eventsService.getEvents();
 
       setTimeout(() => {
+        this.eventsService.getEvents();
         void this.router.navigate(['events'])
-      }, 500);
+      }, 1500);
 
     }
+  }
+
+  addInterests(item: string): void {
+    console.log(item);
+
+    const index = this.interests.findIndex((interest) => interest === item);
+    const newArray = index === -1
+      ? [...this.interests, item]
+      : [...this.interests.slice(0, index), ...this.interests.slice(index + 1)];
+
+    this.interests = [...newArray];
+    console.log(this.interests);
+
+    this.eventsService.user$.next({
+      ...this.eventsService.user$.getValue(),
+      userInterests: this.interests
+    })
+  }
+
+  changeCity(city: string): void {
+    this.userCity = city;
+    this.eventsService.user$.next({
+      ...this.eventsService.user$.getValue(),
+      userCity: this.userCity
+    })
   }
 
 }

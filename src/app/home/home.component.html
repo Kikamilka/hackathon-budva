@@ -1,31 +1,50 @@
 <ng-container *ngIf="userId.length === 0">
-<form class="example-form">
-  <mat-form-field appearance="fill">
-    <mat-label>Your name</mat-label>
-    <input matInput type="text" [(ngModel)]="userName" [ngModelOptions]="{standalone: true}" required>
-  </mat-form-field>
+  <div class="user-content">
+    <h2>Please, enter your name:</h2>
+    <mat-form-field appearance="fill">
+      <mat-label>Your name</mat-label>
+      <input matInput type="text" [(ngModel)]="userName" [ngModelOptions]="{standalone: true}" required>
+    </mat-form-field>
 
-  <mat-chip-list>
-    <ng-container *ngFor="let chip of availableInterests">
-<!--      <mat-chip [selected]="chip.active" (click)="chip.active = !chip.active">-->
-<!--        {{chip.name}}-->
-<!--      </mat-chip>-->
+    <img src="assets/avatar.png" alt="Avatar" class="avatar">
 
-      <mat-button-toggle-group name="interests" aria-label="interests" multiple>
-        <mat-button-toggle [value]="chip">{{chip.name}}</mat-button-toggle>
-      </mat-button-toggle-group>
-    </ng-container>
-  </mat-chip-list>
+    <h2>Please, choose your interests:</h2>
+    <mat-chip-list>
+      <ng-container *ngFor="let chip of eventsService.INTERESTS">
+        <mat-button-toggle-group name="interests" aria-label="interests" multiple>
+          <mat-button-toggle [value]="chip" (click)="addInterests(chip)">{{chip}}</mat-button-toggle>
+        </mat-button-toggle-group>
+      </ng-container>
+    </mat-chip-list>
 
-  <div class="button-container">
-    <button mat-fab aria-label="Save me" (click)="saveUser()">
-      <mat-icon>check_circle</mat-icon>
-    </button>
+    <h2 style="margin-top: 24px">Please, select your city:</h2>
+    <mat-form-field appearance="fill">
+      <mat-select>
+        <mat-option *ngFor="let city of eventsService.CITIES" [value]="userCity" (click)="changeCity(city)">{{city}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="button-container">
+      <button mat-fab aria-label="Save me" (click)="saveUser()" color="primary" class="save-btn">
+        <mat-icon>check_circle</mat-icon>
+      </button>
+    </div>
+
   </div>
-
-</form>
 </ng-container>
 
 <ng-container *ngIf="userId.length > 0">
-  <p>Hi {{userName}}!</p>
+  <div *ngIf="eventsService.events$.getValue().length === 0; else user">
+    <img style="width: 100%" src="assets/lazy-loading.gif" alt="">
+  </div>
+
+  <ng-template #user>
+    <div class="user-content">
+      <p>Hi {{this.eventsService.user$.getValue()?.userName}}!</p>
+
+      <p>Your city {{this.eventsService.user$.getValue()?.userCity}}!</p>
+
+      <img style="width: 100%" src="assets/in-progress.gif" alt="">
+    </div>
+  </ng-template>
 </ng-container>

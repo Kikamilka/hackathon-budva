@@ -27,6 +27,7 @@ export class SwipeCardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const currentSaveIndex = this.eventsService.currentCart$.getValue();
     this.index = currentSaveIndex === 0 ? currentSaveIndex : currentSaveIndex + 1;
+    this.eventsService.currentCart$.next(this.index);
     this.parentSubject.subscribe(event => {
       this.startAnimation(event)
     });
