@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormControlName, Validator, Validators} from "@angular/forms";
 import { v4 as uuidv4 } from 'uuid';
 import {EventsService} from "../services/events.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
     },
   ];
 
-  constructor(private eventsService: EventsService) { }
+  constructor(private eventsService: EventsService, private router: Router) { }
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('userId') || '';
@@ -45,13 +45,19 @@ export class HomeComponent implements OnInit {
   }
 
   saveUser(): void {
-    this.userId = uuidv4();
+    if (this.userName.length > 0) {
+      this.userId = uuidv4();
 
-    localStorage.setItem('userId', this.userId);
-    localStorage.setItem('userName', this.userName);
-    console.log(this.userName, this.userId);
+      localStorage.setItem('userId', this.userId);
+      localStorage.setItem('userName', this.userName);
 
-    this.eventsService.getEvents();
+      this.eventsService.getEvents();
+
+      setTimeout(() => {
+        void this.router.navigate(['events'])
+      }, 500);
+
+    }
   }
 
 }
