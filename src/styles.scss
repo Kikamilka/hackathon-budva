@@ -46,3 +46,18 @@ a:hover {
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.tcontrols {
+  display: flex;
+  justify-content: space-around;
+
+  .my-btn {
+    width: 100px;
+    height: 100px;
+
+    mat-icon {
+      width: 50px;
+      height: 50px;
+      font-size: 50px;
+    }
+  }
+}

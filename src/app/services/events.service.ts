@@ -10,6 +10,7 @@ export class EventsService {
   private url = 'https://bkjkuxabe4.execute-api.us-east-1.amazonaws.com/prod';
 
   public events$: BehaviorSubject<Activity[]> = new BehaviorSubject<Activity[]>([])
+  public currentCart$: BehaviorSubject<number> = new BehaviorSubject<number>(0)
 
   constructor(private http: HttpClient) { }
 

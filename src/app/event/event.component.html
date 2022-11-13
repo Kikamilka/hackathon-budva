@@ -3,7 +3,7 @@
 
   <mat-form-field hintLabel="Event title - short description. Max 40 characters" appearance="fill">
     <mat-label>Enter event title</mat-label>
-    <input matInput #title maxlength="20" [disabled]="!editMode" [(ngModel)]="activity.title">
+    <input matInput #title maxlength="20" [disabled]="!editMode" [(ngModel)]="activity.title" [value]="activity.title">
     <mat-hint align="end">{{title?.value?.length || 0}}/20</mat-hint>
   </mat-form-field>
 
@@ -33,6 +33,14 @@
     <textarea matInput [disabled]="!editMode" [(ngModel)]="activity.description"></textarea>
   </mat-form-field>
 
+  <div *ngIf="!editMode" class="tcontrols">
+    <button mat-fab aria-label="Dislike" (click)='returnToEvents()' color="warn" class="my-btn">
+      <mat-icon>close</mat-icon>
+    </button>
+    <button mat-fab aria-label="Like" (click)='returnToEvents()' color="primary" class="my-btn">
+      <mat-icon>favorite</mat-icon>
+    </button>
+  </div>
 
   <button *ngIf="editMode" (click)="addNewEvent()">Create this</button>
 
